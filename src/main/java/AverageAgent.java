@@ -8,7 +8,6 @@ import java.util.LinkedList;
 public class AverageAgent extends Agent {
     private double value;
     private LinkedList<Integer> receivers;
-    private LinkedList<String> visited = new LinkedList<>();
     private double result = 0;
     private String messageFrom = "";
     private boolean isStart = false;
@@ -28,9 +27,6 @@ public class AverageAgent extends Agent {
     }
 
     public void handleAdd(double add, String from) {
-        if (visited.contains(from)) {
-            return;
-        }
         result+=add;
         counter++;
     }
@@ -84,7 +80,6 @@ public class AverageAgent extends Agent {
         result = (double) arguments[0];
         receivers = (LinkedList<Integer>) arguments[1];
         isStart = (boolean) arguments[2];
-        visited.add(this.getLocalName());
 
         addBehaviour(new ReceiverBehaviour(this));
         addBehaviour(new SenderBehaviour(this));
