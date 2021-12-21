@@ -6,7 +6,6 @@ import jade.wrapper.ContainerController;
 import jade.wrapper.StaleProxyException;
 
 import java.util.LinkedList;
-import java.util.List;
 
 
 class Controller {
@@ -15,7 +14,7 @@ class Controller {
     private final static String PORT = "10098";
     private final static String GUI = "false";
 
-    public void initAgents(int[][] matrix, double[] values, int start) {
+    public void initAgents(int[][] matrix, double[] values) {
         Runtime rt = Runtime.instance();
         Profile p = new ProfileImpl();
         p.setParameter(Profile.MAIN_HOST, LOCALHOST);
@@ -34,7 +33,7 @@ class Controller {
                 }
                 double agentValue = values[i];
 
-                Object[] setupArguments = new Object[] {agentValue, neighbours, i == start};
+                Object[] setupArguments = new Object[] {agentValue, neighbours};
                 AgentController agentController = cc.createNewAgent(String.valueOf(i), AGENT_CLASS, setupArguments);
                 agentController.start();
             }
